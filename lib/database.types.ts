@@ -1,3 +1,6 @@
+Need to install the following packages:
+supabase@2.15.8
+Ok to proceed? (y) 
 
 export type Json =
   | string
@@ -61,18 +64,21 @@ export type Database = {
           avatar_url: string | null
           email: string
           id: string
+          introduce: string | null
           name: string | null
         }
         Insert: {
           avatar_url?: string | null
           email: string
           id: string
+          introduce?: string | null
           name?: string | null
         }
         Update: {
           avatar_url?: string | null
           email?: string
           id?: string
+          introduce?: string | null
           name?: string | null
         }
         Relationships: []
