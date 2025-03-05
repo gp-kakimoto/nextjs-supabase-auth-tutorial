@@ -8,12 +8,12 @@ const Home = async () => {
 
   //セッションの取得
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return (
     <div className="text-center text-x1">
-      {session ? <div>ログイン済</div> : <div>未ログイン</div>}
+      {user ? <div>ログイン済</div> : <div>未ログイン</div>}
     </div>
   );
 };

@@ -10,11 +10,11 @@ const ProfilePage = async () => {
 
   // セッションの取得
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
   // 未承認の場合、リダイレクト
-  if (!session) {
+  if (!user) {
     redirect("/auth/login");
   }
 

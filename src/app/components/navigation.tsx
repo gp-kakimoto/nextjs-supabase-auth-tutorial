@@ -4,16 +4,16 @@ import Link from "next/link";
 import useStore from "../../../store";
 import Image from "next/image";
 import { useEffect } from "react";
-import type { Session } from "@supabase/auth-helpers-nextjs";
+import type { User } from "@supabase/auth-helpers-nextjs";
 import type { Database } from "../../../lib/database.types";
 type ProfileType = Database["public"]["Tables"]["profiles"]["Row"];
 
 //ナビゲーション
 const Navigation = ({
-  session,
+  user,
   profile,
 }: {
-  session: Session | null;
+  user: User | null;
   profile: ProfileType | null;
 }) => {
   const { setUser } = useStore();
@@ -22,13 +22,13 @@ const Navigation = ({
 
   useEffect(() => {
     setUser({
-      id: session ? session.user.id : "",
-      email: session ? session.user.email! : "",
-      name: session && profile ? profile.name : "",
-      introduce: session && profile ? profile.introduce : "",
-      avatar_url: session && profile ? profile.avatar_url : "",
+      id: user ? user.id : "",
+      email: user ? user.email! : "",
+      name: user && profile ? profile.name : "",
+      introduce: user && profile ? profile.introduce : "",
+      avatar_url: user && profile ? profile.avatar_url : "",
     });
-  }, [session, setUser, profile]);
+  }, [user, setUser, profile]);
   return (
     <header className="shadow-lg shadow-gray-100">
       <div className="py-5 container max-w-screen-sm mx-auto flex items-center justify-between">
@@ -37,10 +37,21 @@ const Navigation = ({
         </Link>
 
         <div className="text-sm font-bold">
-          {session ? (
+          {user ? (
             <div className="flex items-center space-x-5">
               <Link href="/settings/profile">
-                <div>プロフィール</div>
+                <div className="relative w-10 h-10">
+                  <Image
+                    src={
+                      profile && profile.avatar_url
+                        ? profile.avatar_url
+                        : "/default.png"
+                    }
+                    className="rounded-full object-cover"
+                    alt="avatar"
+                    fill
+                  />
+                </div>
               </Link>
             </div>
           ) : (

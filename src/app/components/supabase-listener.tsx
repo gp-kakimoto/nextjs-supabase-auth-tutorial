@@ -11,34 +11,34 @@ const SupabaseListener = async () => {
 
   //セッションの取得
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
   //プロフィールの取得
   let profile = null;
-  if (session) {
+  if (user) {
     const { data: currentProfile } = await supabase
       .from("profiles")
       .select("*")
-      .eq("id", session.user.id)
+      .eq("id", user.id)
       .single();
 
     profile = currentProfile;
 
     //メールアドレスを変更した場合、プロフィールを更新
-    if (currentProfile && currentProfile.email !== session.user.email) {
+    if (currentProfile && currentProfile.email !== user.email) {
       //メールアドレスを更新
       const { data: updatedProfile } = await supabase
         .from("profiles")
-        .update({ email: session.user.email })
-        .match({ id: session.user.id })
+        .update({ email: user.email })
+        .match({ id: user.id })
         .select("*")
         .single();
 
       profile = updatedProfile;
     }
   }
-  return <Navigation session={session} profile={profile} />;
+  return <Navigation user={user} profile={profile} />;
 };
 
 export default SupabaseListener;
