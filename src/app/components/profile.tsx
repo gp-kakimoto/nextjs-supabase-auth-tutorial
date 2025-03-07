@@ -148,7 +148,7 @@ const Profile = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         {/** アバター画像 */}
         <div className="mb-5">
-          <div className="flex flex-col text-sm items-ceter justify-center mb-5">
+          <div className="flex flex-col text-sm items-center justify-center mb-5">
             <div className="relative w-24 h-24 mb-5">
               <Image
                 src={avatarUrl}

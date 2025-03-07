@@ -19,7 +19,7 @@ const subNavigation = [
   {
     name: "メールアドレス",
     icon: EnvelopeIcon,
-    href: "settings/email",
+    href: "/settings/email",
   },
   {
     name: "パスワード",
