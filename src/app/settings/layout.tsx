@@ -29,7 +29,7 @@ const subNavigation = [
   {
     name: "ログアウト",
     icon: ArrowLeftOnRectangleIcon,
-    href: "settings/logout",
+    href: "/settings/logout",
   },
 ];
 
